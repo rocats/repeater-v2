@@ -27,7 +27,9 @@ jobs:
       repository: ${{ github.repository }}
       ref: ${{ github.event.pull_request.head.sha }}
       fetch-depth: 0
-    secrets: inherit
+    secrets:
+      TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
 
   # Build Stage
   build-and-push:
@@ -64,4 +66,6 @@ jobs:
     with:
       image_tag: ${{ needs.build-and-push.outputs.image_tag }}
       sha_short: ${{ needs.pre-actions.outputs.git_sha_short }}
-    secrets: inherit
+    secrets:
+      TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
+      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
