@@ -85,9 +85,10 @@ def repeat(update: Update, context: CallbackContext):
     # convert traditional char to simplified char
     # only when text_convert is set to t2s for limited channels
     if chat_id in [item["uid"] for item in channel_lib]:
-        channel = list(filter(lambda x: x["uid"] == chat_id, channel_lib))[0]
-        if is_traditional and (channel["text_convert"] == "t2s"):
-            t = tc.convert(t)
+        channel = list(filter(lambda x: x["uid"] == chat_id, channel_lib))
+        if len(channel) > 0:
+            if is_traditional and (channel[0]["text_convert"] == "t2s"):
+                t = tc.convert(t)
 
     # repeat target text
     if "我" in t and "你" in t:
