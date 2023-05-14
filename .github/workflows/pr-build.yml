@@ -47,7 +47,7 @@ jobs:
         uses: aevea/action-kaniko@master
         with:
           registry: quay.io
-          username: ${{ github.repository_owner }}
+          username: daeuniverse
           password: ${{ secrets.QUAY_PASS }}
           image: daeuniverse/${{ github.event.repository.name }}
           build_file: ${{ env.dockerfile }}
