@@ -49,7 +49,7 @@ jobs:
           registry: quay.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.QUAY_PASS }}
-          image: ${{ github.repository }}
+          image: daeuniverse/${{ github.event.repository.name }}
           build_file: ${{ env.dockerfile }}
           tag: ${{ env.image_tag }}
           tag_with_latest: true
