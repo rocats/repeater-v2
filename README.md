@@ -57,7 +57,7 @@ npm i -g vercel
 
 
 # deploy with config
-./deploy
+./scripts/deploy-datasette.sh
 ```
 
 ## References
