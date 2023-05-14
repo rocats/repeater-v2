@@ -17,3 +17,4 @@ channel_lib = load_channel(
 
 print(channel_lib)
 print([item["uid"] for item in channel_lib])
+print(list(filter(lambda x: x["uid"] == "123456", channel_lib)))
