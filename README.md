@@ -8,18 +8,22 @@
 
 ## Usage
 
+Export credentials
+
+```bash
+export TELEGRAM_APITOKEN=<TOKEN>
+```
+
 Run locally
 
 ```bash
-# activate virtualenv
-export TELEGRAM_APITOKEN=<TOKEN>
 ./serve
 ```
 
 Run as container
 
 ```bash
-TELEGRAM_APITOKEN=<TOKEN> docker-compose up -d --force-recreate --build
+docker-compose up -d --force-recreate --build
 ```
 
 The bot will repeat messages 3 times whose length is no greater than 10 and ends with "！"
