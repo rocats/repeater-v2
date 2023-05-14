@@ -37,6 +37,14 @@ def load_library(url: str) -> List[str]:
     return [item[2] for item in data]
 
 
+def load_channel(url: str) -> List[dict]:
+    data = json.loads(urlopen(url).read().decode("utf-8"))["rows"]
+    return [
+        dict(zip(["row_id", "name", "uid", "type", "text_convert"], row))
+        for row in data
+    ]
+
+
 # load libraries
 sticker_lib = load_library(
     "https://repeater-bot-sqlite.vercel.app/remote/stickers.json"
@@ -44,4 +52,7 @@ sticker_lib = load_library(
 char_lib = load_library("https://repeater-bot-sqlite.vercel.app/remote/words.json")
 animation_lib = load_library(
     "https://repeater-bot-sqlite.vercel.app/remote/animations.json"
+)
+channel_lib = load_channel(
+    "https://repeater-bot-sqlite.vercel.app/remote/channels.json"
 )

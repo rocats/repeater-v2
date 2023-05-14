@@ -4,7 +4,7 @@ import sys
 from collections import defaultdict
 from telegram import Update
 from telegram.ext.callbackcontext import CallbackContext
-from tool.loader import char_lib, animation_lib, sticker_lib
+from tool.loader import char_lib, animation_lib, sticker_lib, channel_lib
 
 from component.text_converter import tc
 
@@ -79,11 +79,16 @@ def repeat(update: Update, context: CallbackContext):
     t = update.message.text.strip()
     e = update.message.entities
     f = update.message.from_user.id
+    chat_id = str(update.message.chat.id)
     is_traditional = tc.check_traditional(update.message.text)
 
     # convert traditional char to simplified char
-    if is_traditional:
-        t = tc.convert(t)
+    # only when text_convert is set to t2s for limited channels
+    if chat_id in [item["uid"] for item in channel_lib]:
+        channel = list(filter(lambda x: x["uid"] == chat_id, channel_lib))[0]
+        print(channel)
+        if is_traditional and (channel["text_convert"] == "t2s"):
+            t = tc.convert(t)
 
     # repeat target text
     if "我" in t and "你" in t:
