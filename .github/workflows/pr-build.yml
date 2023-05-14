@@ -55,7 +55,7 @@ jobs:
           tag_with_latest: true
           cache: true
           cache_registry: quay.io/${{ github.repository_owner }}/cache
-          extra_args: --build-arg PYTHON_VERSION="3.10"
+          extra_args: --build-arg PYTHON_VERSION=3.10
 
       - name: Echo image uri
         run: |
