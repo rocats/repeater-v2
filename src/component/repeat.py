@@ -118,7 +118,10 @@ def repeat(update: Update, context: CallbackContext):
         context.bot.send_message(chat_id=chat_id, text=t)
     # repeat with "???"
     elif 1 <= len(update.message.text) <= 30 and (
-        update.message.text.endswith("???") or update.message.text.endswith("？？？")
+        update.message.text.endswith("??")
+        or update.message.text.endswith("???")
+        or update.message.text.endswith("？？")
+        or update.message.text.endswith("？？？")
     ):
         repeated[chat_id] = True
         context.bot.send_message(chat_id=chat_id, text=t)
