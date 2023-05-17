@@ -1,22 +1,22 @@
 {
-  "plugins": {
-    "datasette-insert": {
-      "allow": {
-        "id": "*"
-      }
-    },
-    "datasette-auth-tokens": {
-      "tokens": [
-        {
-          "token": {
-            "$env": "INSERT_TOKEN"
-          },
-          "actor": {
-            "id": "repeater"
-          }
+    "plugins": {
+        "datasette-insert": {
+            "allow": {
+                "id": "*"
+            }
+        },
+        "datasette-auth-tokens": {
+            "tokens": [
+                {
+                    "token": {
+                        "$env": "INSERT_TOKEN"
+                    },
+                    "actor": {
+                        "id": "repeater"
+                    }
+                }
+            ],
+            "param": "_auth_token"
         }
-      ],
-      "param": "_auth_token"
     }
-  }
 }

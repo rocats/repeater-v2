@@ -1,0 +1,11 @@
+[
+    {
+        "name": "remote",
+        "route": "remote",
+        "path": "remote.db",
+        "size": 20480,
+        "is_mutable": false,
+        "is_memory": false,
+        "hash": "95af764cbd50db471fbe24f1b424d72f9db16436000fcf0c6dce47bf9409ce20"
+    }
+]
