@@ -28,7 +28,7 @@ def strip_punctuation(s: str):
 
 def repeat(update: Update, context: CallbackContext):
     global last_text, repeated, cnt
-    chat_id = update.effective_chat.id
+    chat_id = str(update.message.chat.id)
 
     print(update.message)
 
@@ -79,7 +79,6 @@ def repeat(update: Update, context: CallbackContext):
     t = update.message.text.strip()
     e = update.message.entities
     f = update.message.from_user.id
-    chat_id = str(update.message.chat.id)
     is_traditional = tc.check_traditional(update.message.text)
 
     # convert traditional char to simplified char
@@ -92,7 +91,9 @@ def repeat(update: Update, context: CallbackContext):
 
     # repeat target text
     if "我" in t and "你" in t:
-        t = t.replace("你", "他").replace("我", "你")
+        t = t.replace("你", "TA").replace("我", "你")
+    elif "你" in t:
+        t = t.replace("你", "TA")
     elif "我" in t:
         t = t.replace("我", "你")
     if len([True for char in char_lib if char in t]) > 0:
@@ -143,6 +144,6 @@ def repeat(update: Update, context: CallbackContext):
         cnt[chat_id] += 1
 
 
-def clean_repeat(update: Update):
-    chat_id = update.effective_chat.id
-    last_text[chat_id] = ""
+# def clean_repeat(update: Update):
+#     chat_id = update.effective_chat.id
+#     last_text[chat_id] = ""
