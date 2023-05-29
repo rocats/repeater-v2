@@ -23,7 +23,7 @@ Run locally
 Run as container
 
 ```bash
-docker-compose up -d --force-recreate --build
+docker compose up -d --force-recreate --build
 ```
 
 The bot will repeat messages 3 times whose length is no greater than 10 and ends with "！"
