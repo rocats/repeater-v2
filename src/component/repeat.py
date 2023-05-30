@@ -92,7 +92,7 @@ def repeat(update: Update, context: CallbackContext):
     # repeat target text
     if "我" in t and "你" in t:
         t = t.replace("你", " TA ").replace("我", "你")
-    elif "你" in t and t[0] != "你":
+    elif "你" in t and t[0] == "你":
         t = t.replace("你", " TA ")
     elif "我" in t:
         t = t.replace("我", "你")
