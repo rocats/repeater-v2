@@ -8,5 +8,6 @@ services:
       args:
         PYTHON_VERSION: "3.10"
     environment:
-      - TELEGRAM_APITOKEN
+      TELEGRAM_APITOKEN: ""
+      LUCKY_NUMBER: 6
     restart: unless-stopped

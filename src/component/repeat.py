@@ -1,5 +1,7 @@
 import unicodedata
 import sys
+import os
+import random
 
 from collections import defaultdict
 from telegram import Update
@@ -29,6 +31,7 @@ def strip_punctuation(s: str):
 def repeat(update: Update, context: CallbackContext):
     global last_text, repeated, cnt
     chat_id = str(update.message.chat.id)
+    rand = random.randint(0, 20)
 
     print(update.message)
 
@@ -88,13 +91,16 @@ def repeat(update: Update, context: CallbackContext):
         if len(channel) > 0:
             if is_traditional and (channel[0]["text_convert"] == "t2s"):
                 t = tc.convert(t)
-
     # repeat target text
     if "我" in t and "你" in t:
         t = t.replace("你", "他").replace("我", "你")
     elif "我" in t:
         t = t.replace("我", "你")
     if len([True for char in char_lib if char in t]) > 0:
+        repeated[chat_id] = True
+        context.bot.send_message(chat_id=chat_id, text=t)
+    # repeat text if it wins the lottery
+    if rand == int(os.getenv("LUCKY_NUMBER", 0)):
         repeated[chat_id] = True
         context.bot.send_message(chat_id=chat_id, text=t)
     # repeat 3 times with "!"
