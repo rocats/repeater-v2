@@ -9,10 +9,9 @@
 #
 #  Copyright (C) 2023 @yqlbu
 #
-#  This is a self-hosted software, liscensed under the MIT License.
+#  This is a self-hosted software, licensed under the MIT License.
 #  See /License for more information.
 
----
 name: Build OCI Container (Prod)
 on:
   workflow_dispatch:
@@ -22,21 +21,8 @@ on:
       - 'release/**'
 
 jobs:
-  # Pre-Action Stage
-  pre-actions:
-    uses: daeuniverse/ci-seed-jobs/.github/workflows/pre-actions.yml@master
-    with:
-      repository: ${{ github.repository }}
-      ref: ${{ github.sha }}
-      fetch-depth: 0
-    secrets:
-      TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
-      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-
-  # Build Stage
   build-and-push:
     runs-on: ubuntu-latest
-    needs: [pre-actions]
     env:
       dockerfile: Dockerfile
       image_tag: prod-${{ needs.pre-actions.outputs.git_sha_short }}-${{ github.run_number }}
@@ -62,14 +48,3 @@ jobs:
       - name: Echo image uri
         run: |
           echo "ImageURI (quay.io): quay.io/${{ github.repository }}:${{ env.image_tag }}"
-
-  post-actions:
-    needs: [pre-actions,build-and-push]
-    uses: daeuniverse/ci-seed-jobs/.github/workflows/post-actions.yml@master
-    with:
-      image: daeuniverse/${{ github.event.repository.name }}
-      image_tag: ${{ needs.build-and-push.outputs.image_tag }}
-      sha_short: ${{ needs.pre-actions.outputs.git_sha_short }}
-    secrets:
-      TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
-      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
