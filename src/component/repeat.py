@@ -31,7 +31,7 @@ def strip_punctuation(s: str):
 def repeat(update: Update, context: CallbackContext):
     global last_text, repeated, cnt
     chat_id = str(update.message.chat.id)
-    rand = random.randint(0, 20)
+    rand = random.randint(0, int(os.getenv("RAND_UPPER_LIMIT", 10)))
 
     print(update.message)
 
