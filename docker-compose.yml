@@ -10,4 +10,5 @@ services:
     environment:
       TELEGRAM_APITOKEN: ""
       LUCKY_NUMBER: 6
+      RAND_UPPER_LIMIT: 10
     restart: unless-stopped
