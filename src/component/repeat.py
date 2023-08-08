@@ -100,7 +100,7 @@ def repeat(update: Update, context: CallbackContext):
         repeated[chat_id] = True
         context.bot.send_message(chat_id=chat_id, text=t)
     # repeat text if it wins the lottery
-    if rand == int(os.getenv("LUCKY_NUMBER", 0)):
+    if rand == int(os.getenv("LUCKY_NUMBER", 0)) and not repeated[chat_id]:
         repeated[chat_id] = True
         context.bot.send_message(chat_id=chat_id, text=t)
     # repeat 3 times with "!"
