@@ -99,10 +99,6 @@ def repeat(update: Update, context: CallbackContext):
     if len([True for char in char_lib if char in t]) > 0:
         repeated[chat_id] = True
         context.bot.send_message(chat_id=chat_id, text=t)
-    # repeat text if it wins the lottery
-    if rand == int(os.getenv("LUCKY_NUMBER", 0)) and not repeated[chat_id]:
-        repeated[chat_id] = True
-        context.bot.send_message(chat_id=chat_id, text=t)
     # repeat 3 times with "!"
     if 1 <= len(update.message.text) <= 30 and (
         update.message.text.endswith("！") or update.message.text.endswith("!")
@@ -146,6 +142,10 @@ def repeat(update: Update, context: CallbackContext):
         repeated[chat_id] = False
     else:
         cnt[chat_id] += 1
+    # repeat text if it wins the lottery
+    if rand == int(os.getenv("LUCKY_NUMBER", 0)) and not repeated[chat_id]:
+        repeated[chat_id] = True
+        context.bot.send_message(chat_id=chat_id, text=t)
 
 
 # def clean_repeat(update: Update):
