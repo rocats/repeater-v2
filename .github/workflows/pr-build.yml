@@ -35,6 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       dockerfile: Dockerfile
+      image_name: daeuniverse/${{ github.event.repository.name }}
       image_tag: pr-${{ needs.pre-actions.outputs.git_sha_short }}-${{ github.run_number }}
     outputs:
       image_tag: ${{ env.image_tag }}
@@ -47,7 +48,7 @@ jobs:
           registry: quay.io
           username: daeuniverse
           password: ${{ secrets.QUAY_PASS }}
-          image: daeuniverse/repeater-v2
+          image: ${{ env.image_name }}
           build_file: ${{ env.dockerfile }}
           tag: ${{ env.image_tag }}
           tag_with_latest: true
@@ -57,15 +58,5 @@ jobs:
 
       - name: Echo image uri
         run: |
-          echo "ImageURI (quay.io): quay.io/daeuniverse/${{ github.event.repository.name }}:${{ env.image_tag }}"
+          echo "ImageURI (quay.io): quay.io/${{ env.image_name }}:${{ env.image_tag }}"
 
-  post-actions:
-    needs: [pre-actions,build-and-push]
-    uses: daeuniverse/ci-seed-jobs/.github/workflows/post-actions.yml@master
-    with:
-      image: daeuniverse/${{ github.event.repository.name }}
-      image_tag: ${{ needs.build-and-push.outputs.image_tag }}
-      sha_short: ${{ needs.pre-actions.outputs.git_sha_short }}
-    secrets:
-      TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
-      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
