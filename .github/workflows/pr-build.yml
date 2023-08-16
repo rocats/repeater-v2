@@ -27,14 +27,12 @@ jobs:
       repository: ${{ github.repository }}
       ref: ${{ github.event.pull_request.head.sha }}
       fetch-depth: 0
-    secrets:
-      TELEGRAM_TO: ${{ secrets.TELEGRAM_TO }}
-      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+      notify: false
 
   # Build Stage
   build-and-push:
-    runs-on: ubuntu-latest
     needs: [pre-actions]
+    runs-on: ubuntu-latest
     env:
       dockerfile: Dockerfile
       image_tag: pr-${{ needs.pre-actions.outputs.git_sha_short }}-${{ github.run_number }}
