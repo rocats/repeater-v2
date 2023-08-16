@@ -44,14 +44,15 @@ jobs:
         id: quay_build
         uses: aevea/action-kaniko@master
         with:
-          registry: ghcr.io
+          registry: quay.io
+          username: daeuniverse
           password: ${{ secrets.GITHUB_TOKEN }}
-          image: rocats/repeater-v2
+          image: daeuniverse/repeater-v2
           build_file: ${{ env.dockerfile }}
           tag: ${{ env.image_tag }}
           tag_with_latest: true
           cache: true
-          cache_registry: cache
+          cache_registry: daeuniverse/cache
           extra_args: --build-arg PYTHON_VERSION=3.10
 
       - name: Echo image uri
