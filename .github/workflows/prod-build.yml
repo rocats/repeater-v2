@@ -21,6 +21,15 @@ on:
       - 'release/**'
 
 jobs:
+  pre-actions:
+    uses: daeuniverse/ci-seed-jobs/.github/workflows/pre-actions.yml@master
+    with:
+      repository: ${{ github.repository }}
+      ref: ${{ github.sha }}
+      fetch-depth: 0
+      check-runs: '[]'
+      notify: false
+
   build-and-push:
     runs-on: ubuntu-latest
     env:
