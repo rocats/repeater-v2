@@ -2,11 +2,8 @@ version: "3"
 
 services:
   repeater:
+    image: quay.io/rocats/repeater-v2:latest
     container_name: repeater-v2
-    build:
-      context: .
-      args:
-        PYTHON_VERSION: "3.10"
     environment:
       TELEGRAM_APITOKEN: ""
       LUCKY_NUMBER: 6
