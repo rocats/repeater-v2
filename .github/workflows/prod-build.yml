@@ -46,7 +46,7 @@ jobs:
         with:
           registry: quay.io
           username: daeuniverse
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.QUAY_PASS }}
           image: daeuniverse/repeater-v2
           build_file: ${{ env.dockerfile }}
           tag: ${{ env.image_tag }}
