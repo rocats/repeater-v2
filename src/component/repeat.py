@@ -136,16 +136,16 @@ def repeat(update: Update, context: CallbackContext):
         repeated[chat_id] = True
         context.bot.send_message(chat_id=chat_id, text=t, entities=e)
     last_sender[chat_id] = f
+    # repeat text if it wins the lottery
+    if rand == int(os.getenv("LUCKY_NUMBER", 0)) and not repeated[chat_id]:
+        repeated[chat_id] = True
+        context.bot.send_message(chat_id=chat_id, text=t)
     if update.message.text != last_text[chat_id]:
         last_text[chat_id] = update.message.text
         cnt[chat_id] = 1
         repeated[chat_id] = False
     else:
         cnt[chat_id] += 1
-    # repeat text if it wins the lottery
-    if rand == int(os.getenv("LUCKY_NUMBER", 0)) and not repeated[chat_id]:
-        repeated[chat_id] = True
-        context.bot.send_message(chat_id=chat_id, text=t)
 
 
 # def clean_repeat(update: Update):
