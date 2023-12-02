@@ -99,8 +99,15 @@ def repeat(update: Update, context: CallbackContext):
     if len([True for char in char_lib if char in t]) > 0:
         repeated[chat_id] = True
         context.bot.send_message(chat_id=chat_id, text=t)
+    # repeat with self
+    if "复读" in update.message.text:
+        repeated[chat_id] = True
+        t = t.replace("你", "我")
+        t = t.replace("机", "鹅")
+        t = t.replace("鸡", "鹅")
+        context.bot.send_message(chat_id=chat_id, text=t * 3)
     # repeat 3 times with "!"
-    if 1 <= len(update.message.text) <= 30 and (
+    elif 1 <= len(update.message.text) <= 30 and (
         update.message.text.endswith("！") or update.message.text.endswith("!")
     ):
         repeated[chat_id] = True
