@@ -20,15 +20,6 @@ on:
     types: [ opened, synchronize, reopened ]
 
 jobs:
-  # Pre-Action Stage
-  pre-actions:
-    uses: daeuniverse/ci-seed-jobs/.github/workflows/pre-actions.yml@master
-    with:
-      repository: ${{ github.repository }}
-      ref: ${{ github.event.pull_request.head.sha }}
-      fetch-depth: 0
-      notify: false
-
   # Build Stage
   build-and-push:
     needs: [pre-actions]
