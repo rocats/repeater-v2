@@ -104,7 +104,6 @@ def repeat(update: Update, context: CallbackContext):
         repeated[chat_id] = True
         t = t.replace("你", "我")
         t = t.replace("机", "鹅")
-        t = t.replace("鸡", "鹅")
         context.bot.send_message(chat_id=chat_id, text=t * 3)
     # repeat 3 times with "!"
     elif 1 <= len(update.message.text) <= 30 and (
